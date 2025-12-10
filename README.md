@@ -35,29 +35,3 @@ This project demonstrates core OOP concepts including classes, inheritance, poly
 2. Press F5 to run
 3. Follow on-screen prompts to battle enemies
 
----
-
-*Learning project - Phase 1-4 complete*
-```
-6. **Save** (Ctrl+S)
-
----
-
-## **Step 2: Add to Source Control**
-
-1. **Right-click your solution** (top of Solution Explorer)
-2. Look for **"Add Solution to Source Control..."** or **"Create Git Repository..."**
-3. Click it
-4. Choose **Git**
-
-You should now see a **"Git Changes"** tab appear at the bottom!
-
----
-
-## **Step 3: First Commit**
-
-1. Click the **"Git Changes"** tab (bottom of Visual Studio)
-2. You'll see all your files listed
-3. In the message box at top, type:
-```
-   Initial commit - Phase 1-4 complete: Character system and combat
