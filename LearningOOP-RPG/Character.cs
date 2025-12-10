@@ -31,8 +31,16 @@ namespace LearningOOP_RPG
         //Attack
         public void AttackEnemy(Character target)
         {
-            int damage = this.Attack - target.Defense;
-
+            int damage = this.Attack;
+            if (this is Player player)
+            {
+                // Now we can access Player-specific stuff!
+                if (player.EquippedWeapon != null)
+                {
+                    damage += player.EquippedWeapon.Damage;
+                }
+            }
+            damage = damage - target.Defense;
             if (damage < 1)
             {
                 damage = 1;
