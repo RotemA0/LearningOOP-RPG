@@ -41,14 +41,79 @@ namespace LearningOOP_RPG
         //Equip Weapon
         public void EquipWeapon(Weapon weapon)
         {
+            if (EquippedWeapon != null)
+            {
+                Attack -= EquippedWeapon.Damage; 
+            }
             EquippedWeapon = weapon;
-            Console.WriteLine($"{weapon.Name} Equiped!");
+            Attack += weapon.Damage;  
+            Console.WriteLine($"{weapon.Name} Equipped!");
         }
         //Equip Armor
         public void EquipArmor(Armor armor)
         {
+            if (EquippedArmor != null)
+            {
+                Defense -= EquippedArmor.Defense;
+            }
             EquippedArmor = armor;
+            Defense += armor.Defense;
             Console.WriteLine($"{armor.Name} Equiped!");
+        }
+        // Equip Item
+        public bool EquipItem(int index)
+        {
+            Item item = Inventory.Items[index];
+            if (item is Weapon weapon)
+            {
+                Console.WriteLine($"Equiped: {item}");
+                EquipWeapon(weapon);
+                return true;
+            }
+            if (item is Armor armor)
+            {
+                Console.WriteLine($"Equiped: {item}");
+                EquipArmor(armor);
+                return true;
+            }
+            if (index < 0 || index >= Inventory.Items.Count)
+            {
+                Console.WriteLine("Invalid item index");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice");
+                return false;
+            }
+        }
+        //Use Item
+        public bool UseItem(int index)
+        {
+            Item item = Inventory.Items[index];
+            if (item is Potion)
+            {
+                Console.WriteLine("Used Potion");
+                Potion potion = (Potion)item;
+                Heal(potion.HealAmount);
+                if (Health > MaxHealth)
+                {
+                    Health = MaxHealth;
+                }
+                Console.WriteLine($"Healed {potion.HealAmount} current Health: {Health}");
+                Inventory.RemoveItem(item);
+                return true;
+            }
+            if (index < 0 || index >= Inventory.Items.Count)
+            {
+                Console.WriteLine("Invalid item index");
+                return false;
+            }
+            else 
+            {
+                Console.WriteLine("Invalid Choice");
+                return false;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace LearningOOP_RPG
         {
 
         }
-        public static void Combat(Player player, Enemy enemy)
+        public static void Combat(Player player, Enemy enemy, bool allowCombat)
         {
             while (player.IsAlive() && enemy.IsAlive())
             {
