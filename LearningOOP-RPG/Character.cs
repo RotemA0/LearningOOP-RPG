@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClaudeRPG;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace LearningOOP_RPG
 
         public int MaxMana;
         public int Mana;
+
+        public List<StatusEffect> ActiveEffects = new List<StatusEffect>();
 
         //Check if Alive
         public bool IsAlive()
@@ -71,6 +74,44 @@ namespace LearningOOP_RPG
             Console.WriteLine($"Defense: {Defense}");
             Console.WriteLine($"Magic Power: {MagicPower}");
             Console.WriteLine($"Critical Chance: {CriticalChance * 100}%");
+        }
+
+        //Apply Effect
+        public bool ApplyStatusEffects()
+        {
+            bool isStunned = false;
+
+            foreach (StatusEffect effect in ActiveEffects)
+            {
+                if (effect.Type == StatusEffectType.Burn)
+                {
+                    Health -= effect.DamagePerTurn;
+                    effect.Duration--;
+                }
+                else if (effect.Type == StatusEffectType.Poison)
+                {
+                    Health -= effect.DamagePerTurn;
+                    effect.Duration--;
+                }
+                else if (effect.Type == StatusEffectType.Stun)
+                {
+                    isStunned = true;
+                    effect.Duration--;
+                }
+                else if (effect.Type == StatusEffectType.AttackBuff)
+                {
+                    Attack += effect.AttackBuff;
+                    effect.Duration--;
+                }
+                else
+                {
+                    Defense += effect.DefenseBuff;
+                    effect.Duration--;
+                }
+                
+            }
+            ActiveEffects.RemoveAll(e => e.Duration <= 0);
+            return isStunned;
         }
     }
 }
