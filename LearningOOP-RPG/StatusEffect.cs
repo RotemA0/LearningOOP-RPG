@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClaudeRPG
+namespace LearningOOP_RPG
 {
     //Types
     public enum StatusEffectType
@@ -18,7 +18,7 @@ namespace ClaudeRPG
     }
     public class StatusEffect
     {
-        public string name;
+        public string Name;
         public StatusEffectType Type;
         public int Duration;
         public int DamagePerTurn;

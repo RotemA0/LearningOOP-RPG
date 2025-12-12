@@ -10,10 +10,11 @@ namespace LearningOOP_RPG
     {
         public int ExperienceReward = 25;
         public int GoldDrop = 15;
-
+        public string Special;
         public string Description = "A small, green creature with a rusty dagger";
-        
-        
+        public StatusEffect InflictEffect; 
+        public int EffectChance;
+
         public override void DisplayStats()
         {
             base.DisplayStats();

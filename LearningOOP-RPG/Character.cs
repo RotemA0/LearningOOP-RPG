@@ -1,5 +1,4 @@
-﻿using ClaudeRPG;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,32 +82,15 @@ namespace LearningOOP_RPG
 
             foreach (StatusEffect effect in ActiveEffects)
             {
-                if (effect.Type == StatusEffectType.Burn)
+                if (effect.Type == StatusEffectType.Burn || effect.Type == StatusEffectType.Poison)
                 {
                     Health -= effect.DamagePerTurn;
-                    effect.Duration--;
-                }
-                else if (effect.Type == StatusEffectType.Poison)
-                {
-                    Health -= effect.DamagePerTurn;
-                    effect.Duration--;
                 }
                 else if (effect.Type == StatusEffectType.Stun)
                 {
                     isStunned = true;
-                    effect.Duration--;
                 }
-                else if (effect.Type == StatusEffectType.AttackBuff)
-                {
-                    Attack += effect.AttackBuff;
-                    effect.Duration--;
-                }
-                else
-                {
-                    Defense += effect.DefenseBuff;
-                    effect.Duration--;
-                }
-                
+                effect.Duration--;
             }
             ActiveEffects.RemoveAll(e => e.Duration <= 0);
             return isStunned;
