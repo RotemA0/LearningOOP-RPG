@@ -15,3 +15,5 @@ obj/
 # OS files
 .DS_Store
 Thumbs.db
+/LearningOOP-RPG/Inventory.cs
+/LearningOOP-RPG/Player.cs
