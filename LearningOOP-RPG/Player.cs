@@ -39,10 +39,10 @@ namespace LearningOOP_RPG
         {
             if (EquippedWeapon != null)
             {
-                Attack -= EquippedWeapon.Damage; 
+                CurrentAttack -= EquippedWeapon.Damage; 
             }
             EquippedWeapon = weapon;
-            Attack += weapon.Damage;  
+            CurrentAttack += weapon.Damage;  
             Console.WriteLine($"{weapon.Name} Equipped!");
         }
         //Equip Armor
@@ -50,10 +50,10 @@ namespace LearningOOP_RPG
         {
             if (EquippedArmor != null)
             {
-                Defense -= EquippedArmor.Defense;
+                CurrentDefense -= EquippedArmor.Defense;
             }
             EquippedArmor = armor;
-            Defense += armor.Defense;
+            CurrentDefense += armor.Defense;
             Console.WriteLine($"{armor.Name} Equiped!");
         }
         // Equip Item

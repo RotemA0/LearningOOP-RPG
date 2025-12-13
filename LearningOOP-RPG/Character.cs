@@ -15,8 +15,10 @@ namespace LearningOOP_RPG
         public int MaxHealth;
         public int Health;
 
-        public int Attack;
-        public int Defense;
+        public int CurrentAttack;
+        public int BaseAttack;
+        public int CurrentDefense;
+        public int BaseDefense;
         public int MagicPower;
         public double CriticalChance;
 
@@ -31,9 +33,9 @@ namespace LearningOOP_RPG
             return Health > 0;
         }
         //Attack
-        public void AttackEnemy(Character target)
+        public virtual void AttackEnemy(Character target)
         {
-            int damage = this.Attack;
+            int damage = this.CurrentAttack;
             if (this is Player player)
             {
                 // Now we can access Player-specific stuff!
@@ -42,7 +44,7 @@ namespace LearningOOP_RPG
                     damage += player.EquippedWeapon.Damage;
                 }
             }
-            damage = damage - target.Defense;
+            damage = damage - target.CurrentDefense;
             if (damage < 1)
             {
                 damage = 1;
@@ -69,19 +71,22 @@ namespace LearningOOP_RPG
             Console.WriteLine($"Level: {Level}");
             Console.WriteLine($"Health: {Health}/{MaxHealth}");
             Console.WriteLine($"Mana: {Mana}/{MaxMana}");
-            Console.WriteLine($"Attack: {Attack}");
-            Console.WriteLine($"Defense: {Defense}");
+            Console.WriteLine($"Attack: {BaseAttack}");
+            Console.WriteLine($"Defense: {BaseDefense}");
             Console.WriteLine($"Magic Power: {MagicPower}");
             Console.WriteLine($"Critical Chance: {CriticalChance * 100}%");
         }
 
         //Apply Effect
-        public bool ApplyStatusEffects()
+        public bool ApplyStatusEffects() //Rember to look over!!! Super important
         {
             bool isStunned = false;
+            CurrentAttack = BaseAttack;
+            CurrentDefense = BaseDefense;
 
             foreach (StatusEffect effect in ActiveEffects)
             {
+                
                 if (effect.Type == StatusEffectType.Burn || effect.Type == StatusEffectType.Poison)
                 {
                     Health -= effect.DamagePerTurn;
@@ -90,7 +95,18 @@ namespace LearningOOP_RPG
                 {
                     isStunned = true;
                 }
-                effect.Duration--;
+                else if (effect.Type == StatusEffectType.AttackBuff)
+                {
+                    CurrentAttack += effect.AttackBuff;
+                    
+                }
+                else
+                {
+                    CurrentDefense += effect.DefenseBuff;
+                    
+                }
+                    effect.Duration--;
+                
             }
             ActiveEffects.RemoveAll(e => e.Duration <= 0);
             return isStunned;
