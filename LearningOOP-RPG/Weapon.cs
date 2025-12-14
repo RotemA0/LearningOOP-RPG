@@ -12,5 +12,6 @@ namespace LearningOOP_RPG
         public string Special;
         public int Damage;
         public double CritChanceBonus;
+        public StatusEffect StatusEffect;
     }
 }

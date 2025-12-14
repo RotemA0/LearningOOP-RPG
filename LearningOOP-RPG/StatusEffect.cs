@@ -14,7 +14,6 @@ namespace LearningOOP_RPG
         Stun,
         AttackBuff,
         DefenseBuff
-
     }
     public class StatusEffect
     {

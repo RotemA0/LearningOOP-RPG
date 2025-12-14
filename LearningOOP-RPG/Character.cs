@@ -51,6 +51,30 @@ namespace LearningOOP_RPG
             }
             Console.WriteLine($"{this.Name} attacked {target.Name} for {damage} damage!");
             target.TakeDamage(damage);
+            if (this is Enemy enemy)
+            {
+                if (enemy.InflictEffect != null && enemy.EffectChance > 0)
+                {
+                    Random random = new Random();
+                    int roll = random.Next(1, 101);
+
+                    if (roll <= enemy.EffectChance)
+                    {
+                        StatusEffect newEffect = new StatusEffect
+                        {
+                            Name = enemy.InflictEffect.Name,
+                            Type = enemy.InflictEffect.Type,
+                            Duration = enemy.InflictEffect.Duration,
+                            DamagePerTurn = enemy.InflictEffect.DamagePerTurn,
+                            AttackBuff = enemy.InflictEffect.AttackBuff,
+                            DefenseBuff = enemy.InflictEffect.DefenseBuff
+                        };
+                        target.ActiveEffects.Add(newEffect);
+                        Console.WriteLine($"{target.Name} was inflicted with {newEffect.Name}!");
+                    }
+                }
+
+            }
         }
         //Take damage
         public void TakeDamage(int damage)
